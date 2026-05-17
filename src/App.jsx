@@ -375,14 +375,21 @@ export default function PeiyuHomepage() {
           </div>
           <div className="border-y border-slate-200 bg-white">
             {news.map((item) => (
-              <div key={item.id ?? item.text} className="border-b border-slate-100 px-5 py-4 text-base font-medium leading-7 text-slate-700 last:border-b-0 md:text-lg">
-                <span>{item.text}</span>
-                {item.latest ? (
-                  <span className="ml-3 inline-flex items-center gap-1.5 align-middle text-xs font-bold uppercase tracking-wide text-amber-600">
-                    <span className="inline-block animate-bounce text-sm">👏</span>
-                    Latest
-                  </span>
+              <div key={item.id ?? item.text} className="flex gap-4 border-b border-slate-100 px-5 py-4 last:border-b-0">
+                {item.date ? (
+                  <time dateTime={item.date} className="w-14 shrink-0 pt-0.5 text-xs font-semibold tabular-nums text-slate-400">
+                    {item.date}
+                  </time>
                 ) : null}
+                <p className="text-base font-medium leading-7 text-slate-700 md:text-lg">
+                  <span>{item.text}</span>
+                  {item.latest ? (
+                    <span className="ml-3 inline-flex items-center gap-1.5 align-middle text-xs font-bold uppercase tracking-wide text-amber-600">
+                      <span className="inline-block animate-bounce text-sm">👏</span>
+                      Latest
+                    </span>
+                  ) : null}
+                </p>
               </div>
             ))}
           </div>

@@ -272,16 +272,19 @@
   "news": [
     {
       "id": "icml-2026-reviewer",
+      "date": "05/2026",
       "text": "Selected as an ICML 2026 Silver Reviewer.",
       "latest": true
     },
     {
       "id": "acl-2026-three-papers",
+      "date": "04/2026",
       "text": "Three papers accepted by ACL 2026: one Main paper, one Findings paper, and one Demo paper.",
       "latest": false
     },
     {
       "id": "icml-2026-two-papers",
+      "date": "04/2026",
       "text": "Two papers accepted by ICML 2026, covering dynamic Text-to-SQL workflows and KV cache optimization.",
       "latest": false
     }
