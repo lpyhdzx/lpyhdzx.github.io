@@ -65,6 +65,8 @@ function runSmokeTests() {
   console.assert(isNonEmptyString(recruiting.title), "Recruiting title must be non-empty.");
   console.assert(isNonEmptyString(recruiting.text), "Recruiting text must be non-empty.");
   console.assert(isNonEmptyString(profile.name), "Profile name must be non-empty.");
+  console.assert(isNonEmptyString(profile.photo), "Profile photo must be non-empty.");
+  console.assert(isNonEmptyString(profile.cover), "Profile cover must be non-empty.");
   console.assert(isNonEmptyString(profile.email) && profile.email.includes("@"), "Profile email must be valid-looking.");
   console.assert(isNonEmptyString(profile.scholar) && profile.scholar.startsWith("https://"), "Profile scholar link must be valid-looking.");
   console.assert(isNonEmptyString(profile.scholarUserId), "Profile scholar user id must be non-empty.");
@@ -391,41 +393,48 @@ export default function PeiyuHomepage() {
       </header>
 
       <main>
-        <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-10 md:grid-cols-[0.78fr_1.22fr] md:px-10 md:pb-24 md:pt-16">
-          <div>
-            <div className="border border-slate-200 bg-white p-4">
-              <div className="overflow-hidden border border-slate-100 bg-white">
-                <div className="relative h-96 bg-slate-100">
-                  <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
-                </div>
-                <div className="p-5">
-                  <div className="text-2xl font-semibold text-slate-950">{profile.name}</div>
-                  <div className="mt-1 text-sm text-slate-600">{profile.title}, {profile.affiliation}</div>
+        <section className="mx-auto max-w-7xl px-6 pb-12 pt-8 md:px-10 md:pb-16 md:pt-12">
+          <div className="overflow-hidden border border-slate-200 bg-white">
+            <div className="aspect-[2.2/1] min-h-72 w-full bg-slate-100 sm:aspect-[2.4/1] md:min-h-96 md:aspect-[2.6/1] lg:max-h-[28rem]">
+              <img src={profile.cover} alt="Research cover" className="h-full w-full object-cover object-center" />
+            </div>
+
+            <div className="grid gap-8 px-6 py-8 md:grid-cols-[15rem_1fr] md:px-8 md:py-10">
+              <div>
+                <img
+                  src={profile.photo}
+                  alt={profile.name}
+                  className="h-36 w-36 rounded-full border border-slate-200 bg-white object-cover md:h-44 md:w-44"
+                />
+                <div className="mt-5">
+                  <div className="text-3xl font-semibold tracking-tight text-slate-950">{profile.name}</div>
+                  <div className="mt-2 text-sm leading-6 text-slate-600">{profile.title}</div>
+                  <div className="text-sm leading-6 text-slate-500">{profile.affiliation}</div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="flex flex-col justify-center">
-            <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 md:text-7xl">{profile.shortName}</h1>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <ProfileLink href={`mailto:${profile.email}`} icon="mail" label="Email" />
-              <ProfileLink href={profile.github} icon="github" label="GitHub" />
-              <ProfileLink href={profile.scholar} icon="scholar" label="Google Scholar" />
-              <ProfileLink href={profile.homepage} icon="homepage" label="UIBE Homepage" />
-            </div>
-            <div className="mt-7 max-w-2xl space-y-4 text-base leading-7 text-slate-600 md:text-lg md:leading-8">
-              {bioParagraphs.map((paragraph, index) => (
-                <BioParagraph
-                  key={paragraph}
-                  text={paragraph}
-                  suffix={
-                    index === bioParagraphs.length - 1 ? (
-                      <ScholarCitationInText href={profile.scholar} scholarStats={scholarStats} locale="en" icon={Icon} />
-                    ) : null
-                  }
-                />
-              ))}
+              <div className="md:pt-4">
+                <div className="mb-5 text-xs font-semibold uppercase tracking-widest text-sky-600">Personal Academic Homepage</div>
+                <div className="flex flex-wrap gap-3">
+                  <ProfileLink href={`mailto:${profile.email}`} icon="mail" label="Email" />
+                  <ProfileLink href={profile.github} icon="github" label="GitHub" />
+                  <ProfileLink href={profile.scholar} icon="scholar" label="Google Scholar" />
+                  <ProfileLink href={profile.homepage} icon="homepage" label="UIBE Homepage" />
+                </div>
+                <div className="mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-600 md:text-lg md:leading-8">
+                  {bioParagraphs.map((paragraph, index) => (
+                    <BioParagraph
+                      key={paragraph}
+                      text={paragraph}
+                      suffix={
+                        index === bioParagraphs.length - 1 ? (
+                          <ScholarCitationInText href={profile.scholar} scholarStats={scholarStats} locale="en" icon={Icon} />
+                        ) : null
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

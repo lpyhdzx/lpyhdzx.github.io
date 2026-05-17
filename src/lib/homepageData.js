@@ -1,5 +1,6 @@
 import raw from "../data/homepage.json";
 import authorPhoto from "../data/author-img.jpeg";
+import researchCover from "../data/research_cover.png";
 import bibtexById from "../data/publications-bib.json";
 import scholarStatsRaw from "../data/scholar-stats.json";
 
@@ -51,7 +52,7 @@ export function loadHomepageData() {
   }));
 
   return {
-    profile: { ...profile, photo: authorPhoto },
+    profile: { ...profile, photo: authorPhoto, cover: researchCover },
     scholarStats: scholarStatsRaw,
     bioParagraphs,
     chineseBio,
