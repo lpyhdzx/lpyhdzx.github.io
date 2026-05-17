@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { loadHomepageData } from "./lib/homepageData";
 
-const { profile, bioParagraphs, recruiting, teaching, courses, directions, publications, news } = loadHomepageData();
+const { profile, bioParagraphs, chineseBio, recruiting, teaching, courses, directions, publications, news } = loadHomepageData();
 
 const themeStyles = {
   sky: {
@@ -58,6 +58,8 @@ function runSmokeTests() {
   console.assert(courses.length === 4, "Expected four teaching course items.");
   console.assert(bioParagraphs.length === 3, "Expected three biography paragraphs.");
   console.assert(bioParagraphs.every((item) => isNonEmptyString(item)), "Every biography paragraph must be non-empty.");
+  console.assert(isNonEmptyString(chineseBio.prefix) && isNonEmptyString(chineseBio.suffix), "Chinese biography must be non-empty.");
+  console.assert(isNonEmptyString(chineseBio.advisorOne), "Chinese advisor name must be non-empty.");
   console.assert(isNonEmptyString(recruiting.title), "Recruiting title must be non-empty.");
   console.assert(isNonEmptyString(recruiting.text), "Recruiting text must be non-empty.");
   console.assert(isNonEmptyString(profile.name), "Profile name must be non-empty.");
@@ -150,6 +152,34 @@ function BioParagraph({ text }) {
       <HighlightName>Prof. Wei Xu</HighlightName>
       {partsAfterWei[1]}
     </p>
+  );
+}
+
+function ChineseBio() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-4 md:px-10">
+      <div className="border-l-4 border-sky-200 bg-white px-6 py-5 text-base leading-8 text-slate-700 md:text-lg md:leading-9">
+        <p>
+          <span>{chineseBio.prefix}</span>
+          <HighlightName>{chineseBio.advisorOne}</HighlightName>
+          <span>{chineseBio.suffix}</span>
+        </p>
+        <div className="mt-5 border-l-4 border-emerald-300 bg-emerald-50 px-5 py-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+            </span>
+            {recruiting.title}
+          </div>
+          <p className="mt-2 text-slate-700">{recruiting.text}</p>
+          <a href={`mailto:${profile.email}`} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">
+            邮件联系
+            <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -357,16 +387,7 @@ export default function PeiyuHomepage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-4 md:px-10">
-          <div className="border-l-4 border-emerald-300 bg-white px-6 py-5">
-            <div className="text-xs font-semibold uppercase tracking-widest text-emerald-600">{recruiting.title}</div>
-            <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700 md:text-lg md:leading-8">{recruiting.text}</p>
-            <a href={`mailto:${profile.email}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">
-              Contact me
-              <Icon name="arrow" />
-            </a>
-          </div>
-        </section>
+        <ChineseBio />
 
         <section className="mx-auto max-w-7xl px-6 py-6 md:px-10">
           <div className="mb-5">

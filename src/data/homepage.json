@@ -15,9 +15,14 @@
     "I received my PhD in Artificial Intelligence from the Gaoling School of Artificial Intelligence, Renmin University of China, advised by Prof. Wayne Xin Zhao. I also hold an MS in Software Engineering from the School of Information, advised by Prof. Wei Xu.",
     "My research interests primarily focus on natural language processing, model compression, and efficient LLM systems."
   ],
+  "chineseBio": {
+    "prefix": "刘沛羽，对外经济贸易大学人工智能与数据科学学院助理教授。于2024年在中国人民大学高瓴人工智能学院获人工智能博士学位，导师为",
+    "advisorOne": "赵鑫教授",
+    "suffix": "。研究兴趣围绕自然语言处理与模型压缩展开，近期重点关注大语言模型高效推理、长上下文推理、智能体数据分析、代码生成等方向。近年来在ACL、EMNLP、COLING、ICML、NeurIPS等自然语言处理与机器学习领域国际会议上发表多篇论文，曾获ACL 2023 Best Paper提名。"
+  },
   "recruiting": {
-    "title": "Prospective Students",
-    "text": "I am always happy to hear from motivated students who are curious about efficient LLMs, model compression, long-context inference, and agentic data intelligence. If you have your own ideas and want to work on meaningful research with real impact, feel free to contact me."
+    "title": "招生与合作",
+    "text": "欢迎对高效大语言模型、模型压缩、长上下文推理、智能体数据分析和代码生成等方向感兴趣的同学联系我。如果你有自己的想法，并希望一起做有意义、有影响力的研究，欢迎通过邮件交流。"
   },
   "teaching": {
     "title": "Teaching AI through systems, history, and practice",

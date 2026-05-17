@@ -34,6 +34,7 @@ export function loadHomepageData() {
   const {
     profile,
     bioParagraphs,
+    chineseBio,
     recruiting,
     teaching,
     courses,
@@ -51,6 +52,7 @@ export function loadHomepageData() {
   return {
     profile: { ...profile, photo: authorPhoto },
     bioParagraphs,
+    chineseBio,
     recruiting,
     teaching,
     courses,
