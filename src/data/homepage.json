@@ -1,0 +1,156 @@
+{
+  "profile": {
+    "name": "Peiyu Liu / 刘沛羽",
+    "shortName": "Peiyu Liu",
+    "title": "Assistant Professor",
+    "affiliation": "University of International Business and Economics",
+    "group": "LLM-Cube",
+    "email": "liupeiyustu@gmail.com",
+    "github": "#",
+    "tagline": "Efficient LLMs, runtime systems, and agentic data intelligence.",
+    "bio": "I study how large language models can become more efficient and useful by reorganizing parameters, reducing runtime memory cost, and building adaptive agent workflows for real-world data tasks."
+  },
+  "pills": [
+    "Assistant Professor",
+    "Efficient LLMs",
+    "Model Compression",
+    "Long-context Inference",
+    "Text-to-SQL Agents"
+  ],
+  "courses": [
+    "Data Structures & Algorithms",
+    "AI Literacy",
+    "LLM Frontiers",
+    "AI + X Research Tools"
+  ],
+  "directions": [
+    {
+      "id": "parameters",
+      "name": "Parameters",
+      "subtitle": "Efficient parameter representation and structural adaptation",
+      "desc": "This line studies how to reduce and reorganize model parameters through decomposition, sharing, masking, and lightweight structural transformation.",
+      "theme": "sky"
+    },
+    {
+      "id": "runtime",
+      "name": "Runtime",
+      "subtitle": "KV cache, long-context inference, and memory-aware evaluation",
+      "desc": "This line focuses on runtime cost, especially memory footprint and latency during long-context prefill and decoding.",
+      "theme": "cyan"
+    },
+    {
+      "id": "agent",
+      "name": "Agent",
+      "subtitle": "Dynamic workflows, tool use, and agentic data intelligence",
+      "desc": "This line treats LLM applications as workflow systems, where the model chooses tools, composes components, and adapts execution paths to each query.",
+      "theme": "violet"
+    },
+    {
+      "id": "squrve",
+      "name": "Squrve",
+      "subtitle": "An open-source system for Text-to-SQL research and deployment",
+      "desc": "Squrve turns the Text-to-SQL research line into reusable components, evaluation workflows, and deployable data-analysis systems.",
+      "theme": "emerald"
+    }
+  ],
+  "papers": [
+    {
+      "id": "masks-moe",
+      "directionId": "parameters",
+      "order": 1,
+      "venue": "ACL 2025",
+      "title": "Masks Can be Learned as an Alternative to Experts",
+      "tag": "Mixture-of-Masks",
+      "detail": "Learnable binary masks for sparse expert-like computation."
+    },
+    {
+      "id": "mpop",
+      "directionId": "parameters",
+      "order": 2,
+      "venue": "ACL 2021",
+      "title": "MPOP: Lightweight Fine-tuning for Pre-trained Language Model Compression",
+      "tag": "MPO Fine-tuning",
+      "detail": "Matrix product operator based parameter-efficient adaptation."
+    },
+    {
+      "id": "livelongbench",
+      "directionId": "runtime",
+      "order": 1,
+      "venue": "ACL 2026 Findings",
+      "title": "LiveLongBench: Tackling Long-Context Understanding for Spoken Texts from Live Streams",
+      "tag": "Long Context",
+      "detail": "Spoken long-context benchmark for retrieval and reasoning."
+    },
+    {
+      "id": "fastv-rag",
+      "directionId": "runtime",
+      "order": 2,
+      "venue": "Project",
+      "title": "FastV-RAG: Fast Visual Retrieval-Augmented Generation",
+      "tag": "Video / Visual RAG",
+      "detail": "Visual RAG exploration with a small GIF-style demo."
+    },
+    {
+      "id": "kv-cache",
+      "directionId": "runtime",
+      "order": 3,
+      "venue": "Ongoing",
+      "title": "KV Cache Compression for Long-context LLM Inference",
+      "tag": "Runtime Memory",
+      "detail": "Reducing KV cache storage while preserving QA performance."
+    },
+    {
+      "id": "dynamic-workflows",
+      "directionId": "agent",
+      "order": 1,
+      "venue": "ICML 2026",
+      "title": "Beyond Static Pipelines: Learning Dynamic Workflows for Text-to-SQL",
+      "tag": "Dynamic Workflows",
+      "detail": "Query-specific Text-to-SQL workflows beyond fixed pipelines."
+    },
+    {
+      "id": "harness-engineering",
+      "directionId": "agent",
+      "order": 2,
+      "venue": "Survey / Ongoing",
+      "title": "Harness Engineering for LLM-based Agents",
+      "tag": "Agent Infrastructure",
+      "detail": "Prompts, tools, memory, context, and scaffolds for agents."
+    },
+    {
+      "id": "squrve-toolkit",
+      "directionId": "squrve",
+      "order": 1,
+      "venue": "Toolkit",
+      "title": "Squrve: An Open-source Toolkit for Text-to-SQL Workflows",
+      "tag": "Open Source",
+      "detail": "Modular components for SQL generation, evaluation, and refinement."
+    },
+    {
+      "id": "squrve-sql",
+      "directionId": "squrve",
+      "order": 2,
+      "venue": "Method",
+      "title": "Stronger SQL Generation with Workflow-level Optimization",
+      "tag": "Text-to-SQL",
+      "detail": "Robust SQL generation on top of Squrve workflows."
+    }
+  ],
+  "news": [
+    {
+      "id": "icml-2026-workflows",
+      "date": "2026-05",
+      "text": "ICML 2026 regular paper accepted on dynamic workflows for Text-to-SQL."
+    },
+    {
+      "id": "acl-2026-livelongbench",
+      "date": "2026-03",
+      "text": "ACL 2026 Findings paper accepted: LiveLongBench for spoken long-context understanding."
+    },
+    {
+      "id": "squrve-dev",
+      "date": "2026-01",
+      "text": "Squrve is being developed as an open-source framework for Text-to-SQL workflows."
+    }
+  ]
+}
