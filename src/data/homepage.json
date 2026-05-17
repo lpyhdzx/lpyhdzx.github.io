@@ -182,6 +182,7 @@
     },
     {
       "id": "moe-pruning-neurips25-pub",
+      "dblpKey": "journals/corr/abs-2504-06792",
       "year": "2025",
       "venue": "NeurIPS 2025",
       "title": "Domain-specific Pruning of Large Mixture-of-Experts Models with Few-shot Demonstrations",
@@ -189,6 +190,7 @@
     },
     {
       "id": "masks-acl25-pub",
+      "dblpKey": "conf/acl/LiuZXZSY25",
       "year": "2025",
       "venue": "ACL 2025",
       "title": "Masks Can be Learned as an Alternative to Experts",
@@ -196,6 +198,7 @@
     },
     {
       "id": "socratic-acl25-pub",
+      "dblpKey": "conf/acl/PeiLZML25",
       "year": "2025",
       "venue": "ACL Findings 2025",
       "title": "Socratic Style Chain-of-Thoughts Help LLMs to be a Better Reasoner",
@@ -203,6 +206,7 @@
     },
     {
       "id": "linkalign-emnlp25-pub",
+      "dblpKey": "journals/corr/abs-2503-18596",
       "year": "2025",
       "venue": "EMNLP 2025",
       "title": "LinkAlign: Scalable Schema Linking for Real-world Large-scale Multi-database Text-to-SQL",
@@ -210,6 +214,7 @@
     },
     {
       "id": "quant-emergent-lrec24",
+      "dblpKey": "conf/coling/LiuLGGDZDLDW24",
       "year": "2024",
       "venue": "LREC-COLING 2024",
       "title": "Do Emergent Abilities Exist in Quantized Large Language Models: An Empirical Study",
@@ -217,6 +222,7 @@
     },
     {
       "id": "kv-quant-acl24-pub",
+      "dblpKey": "conf/acl/LiuGZWMW24",
       "year": "2024",
       "venue": "ACL 2024",
       "title": "Unlocking Data-free Low-bit Quantization with Matrix Decomposition for KV Cache Compression",
@@ -224,6 +230,7 @@
     },
     {
       "id": "stable-rank-lrec24",
+      "dblpKey": "conf/coling/LiuGZZW24",
       "year": "2024",
       "venue": "LREC-COLING 2024",
       "title": "Enhancing Parameter-efficient Fine-tuning with Simple Calibration Based on Stable Rank",
@@ -231,6 +238,7 @@
     },
     {
       "id": "param-sharing-emnlp23-pub",
+      "dblpKey": "conf/emnlp/LiuGCZW23",
       "year": "2023",
       "venue": "EMNLP Findings 2023",
       "title": "Enhancing Scalability of Pre-trained Language Models via Efficient Parameter Sharing",
@@ -238,6 +246,7 @@
     },
     {
       "id": "overparam-acl23",
+      "dblpKey": "conf/acl/GaoZLZW23",
       "year": "2023",
       "venue": "ACL 2023",
       "title": "Small Pre-trained Language Models Can be Fine-tuned as Large Models via Over-parameterization",
@@ -245,6 +254,7 @@
     },
     {
       "id": "moe-coling22",
+      "dblpKey": "conf/coling/GaoLZZLW22",
       "year": "2022",
       "venue": "COLING 2022",
       "title": "Parameter-efficient Mixture-of-Experts Architecture for Pre-trained Language Models",
@@ -252,6 +262,7 @@
     },
     {
       "id": "mpo-acl21-pub",
+      "dblpKey": "conf/acl/LiuGZXLW20",
       "year": "2021",
       "venue": "ACL 2021",
       "title": "Enabling Lightweight Fine-tuning for Pre-trained Language Model Compression Based on Matrix Product Operators",

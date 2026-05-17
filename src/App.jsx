@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { loadHomepageData } from "./lib/homepageData";
 
 const { profile, bioParagraphs, recruiting, teaching, courses, directions, publications, news } = loadHomepageData();
@@ -208,12 +208,56 @@ function DirectionRow({ direction, index }) {
   );
 }
 
+function BibButton({ paper }) {
+  const [status, setStatus] = useState("idle");
+
+  async function copyBibtex() {
+    if (!paper.bibtex) {
+      if (paper.dblpUrl) {
+        window.open(`${paper.dblpUrl}?view=bibtex`, "_blank", "noopener,noreferrer");
+      }
+      setStatus("missing");
+      window.setTimeout(() => setStatus("idle"), 2000);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(paper.bibtex);
+      setStatus("copied");
+    } catch {
+      setStatus("error");
+    }
+
+    window.setTimeout(() => setStatus("idle"), 2000);
+  }
+
+  const label = status === "copied" ? "Copied" : status === "missing" ? "No Bib" : status === "error" ? "Failed" : "Bib";
+
+  return (
+    <button
+      type="button"
+      onClick={copyBibtex}
+      title={paper.bibtex ? "Copy DBLP BibTeX" : paper.dblpUrl ? "Open DBLP BibTeX page" : "Add dblpKey and run npm run sync-bib"}
+      className={`shrink-0 border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide transition ${
+        status === "copied"
+          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+          : status === "missing" || status === "error"
+            ? "border-amber-200 bg-amber-50 text-amber-700"
+            : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:text-sky-700"
+      }`}
+    >
+      {label}
+    </button>
+  );
+}
+
 function PublicationItem({ paper }) {
   return (
     <div className="border-b border-slate-100 py-4 last:border-b-0">
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-slate-600">{paper.venue}</span>
-        <h3 className="text-sm font-semibold leading-6 text-slate-950">{paper.title}</h3>
+        <h3 className="min-w-0 flex-1 text-sm font-semibold leading-6 text-slate-950">{paper.title}</h3>
+        <BibButton paper={paper} />
       </div>
       <p className="mt-1 text-xs leading-5 text-slate-500">{paper.authors}</p>
     </div>
