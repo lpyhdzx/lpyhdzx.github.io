@@ -29,6 +29,9 @@ jobs:
           fi
 
       - run: npm ci
+      - name: Sync Google Scholar citation stats
+        run: npm run sync-scholar
+        continue-on-error: true
       - run: npm run build
 
       - name: Verify production build

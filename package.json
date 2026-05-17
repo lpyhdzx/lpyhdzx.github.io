@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync-bib": "node scripts/sync-bibtex.mjs"
+    "sync-bib": "node scripts/sync-bibtex.mjs",
+    "sync-scholar": "node scripts/sync-scholar.mjs",
+    "sync-scholar:mock": "node scripts/sync-scholar.mjs --mock"
   },
   "dependencies": {
     "react": "^19.2.6",

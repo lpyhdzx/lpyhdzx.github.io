@@ -1,6 +1,7 @@
 import raw from "../data/homepage.json";
 import authorPhoto from "../data/author-img.jpeg";
 import bibtexById from "../data/publications-bib.json";
+import scholarStatsRaw from "../data/scholar-stats.json";
 
 function sortByOrder(items) {
   return [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -51,6 +52,7 @@ export function loadHomepageData() {
 
   return {
     profile: { ...profile, photo: authorPhoto },
+    scholarStats: scholarStatsRaw,
     bioParagraphs,
     chineseBio,
     recruiting,

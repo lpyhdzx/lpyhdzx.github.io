@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { loadHomepageData } from "./lib/homepageData";
+import ScholarCitationInText from "./components/ScholarCitationInText";
 
-const { profile, bioParagraphs, chineseBio, recruiting, teaching, courses, directions, publications, news } = loadHomepageData();
+const { profile, bioParagraphs, chineseBio, recruiting, teaching, courses, directions, publications, news, scholarStats } =
+  loadHomepageData();
 
 const themeStyles = {
   sky: {
@@ -65,6 +67,8 @@ function runSmokeTests() {
   console.assert(isNonEmptyString(profile.name), "Profile name must be non-empty.");
   console.assert(isNonEmptyString(profile.email) && profile.email.includes("@"), "Profile email must be valid-looking.");
   console.assert(isNonEmptyString(profile.scholar) && profile.scholar.startsWith("https://"), "Profile scholar link must be valid-looking.");
+  console.assert(isNonEmptyString(profile.scholarUserId), "Profile scholar user id must be non-empty.");
+  console.assert(!scholarStats || scholarStats.citations == null || typeof scholarStats.citations === "number", "Scholar citations must be a number when present.");
   console.assert(isNonEmptyString(profile.homepage) && profile.homepage.startsWith("https://"), "Profile homepage link must be valid-looking.");
   console.assert(directions.every((direction) => Array.isArray(direction.works) && direction.works.length > 0), "Every direction must have works.");
   console.assert(directions.every((direction) => isNonEmptyString(direction.name)), "Every direction must have a name.");
@@ -79,10 +83,10 @@ function runSmokeTests() {
 
 runSmokeTests();
 
-function Icon({ name }) {
+function Icon({ name, className = "h-4 w-4" }) {
   if (name === "mail") {
     return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="5" width="18" height="14" rx="2" />
         <path d="M4 7l8 6 8-6" />
       </svg>
@@ -91,7 +95,7 @@ function Icon({ name }) {
 
   if (name === "github") {
     return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 3a9 9 0 0 0-3 17c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.1-3.4-1.1-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1 1.6 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 7 6.8c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1.1 2.8c0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 2v2.9c0 .3.2.6.7.5A9 9 0 0 0 12 3Z" />
       </svg>
     );
@@ -99,7 +103,7 @@ function Icon({ name }) {
 
   if (name === "scholar") {
     return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 3L3 8l9 5 9-5-9-5Z" />
         <path d="M6 10.5V15c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5" />
       </svg>
@@ -108,7 +112,7 @@ function Icon({ name }) {
 
   if (name === "homepage") {
     return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4 10.5 12 4l8 6.5" />
         <path d="M6.5 9.5V20h11V9.5" />
         <path d="M10 20v-5h4v5" />
@@ -117,7 +121,7 @@ function Icon({ name }) {
   }
 
   return (
-    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M7 17L17 7" />
       <path d="M9 7h8v8" />
     </svg>
@@ -137,21 +141,34 @@ function HighlightName({ children }) {
   return <span className="rounded bg-sky-50 px-1.5 py-0.5 font-semibold text-sky-800">{children}</span>;
 }
 
-function BioParagraph({ text }) {
-  if (!text.includes("Prof. Wayne Xin Zhao") && !text.includes("Prof. Wei Xu")) {
-    return <p>{text}</p>;
-  }
+function BioParagraph({ text, suffix = null }) {
+  let body;
 
-  const partsAfterWayne = text.split("Prof. Wayne Xin Zhao");
-  const partsAfterWei = partsAfterWayne[1].split("Prof. Wei Xu");
+  if (!text.includes("Prof. Wayne Xin Zhao") && !text.includes("Prof. Wei Xu")) {
+    body = text;
+  } else {
+    const partsAfterWayne = text.split("Prof. Wayne Xin Zhao");
+    const partsAfterWei = partsAfterWayne[1].split("Prof. Wei Xu");
+    body = (
+      <>
+        {partsAfterWayne[0]}
+        <HighlightName>Prof. Wayne Xin Zhao</HighlightName>
+        {partsAfterWei[0]}
+        <HighlightName>Prof. Wei Xu</HighlightName>
+        {partsAfterWei[1]}
+      </>
+    );
+  }
 
   return (
     <p>
-      {partsAfterWayne[0]}
-      <HighlightName>Prof. Wayne Xin Zhao</HighlightName>
-      {partsAfterWei[0]}
-      <HighlightName>Prof. Wei Xu</HighlightName>
-      {partsAfterWei[1]}
+      {body}
+      {suffix ? (
+        <>
+          {" "}
+          {suffix}
+        </>
+      ) : null}
     </p>
   );
 }
@@ -163,7 +180,8 @@ function ChineseBio() {
         <p>
           <span>{chineseBio.prefix}</span>
           <HighlightName>{chineseBio.advisorOne}</HighlightName>
-          <span>{chineseBio.suffix}</span>
+          <span>{chineseBio.suffix}</span>{" "}
+          <ScholarCitationInText href={profile.scholar} scholarStats={scholarStats} locale="zh" icon={Icon} />
         </p>
         <div className="mt-5 border-l-4 border-emerald-300 bg-emerald-50 px-5 py-4">
           <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
@@ -397,8 +415,16 @@ export default function PeiyuHomepage() {
               <ProfileLink href={profile.homepage} icon="homepage" label="UIBE Homepage" />
             </div>
             <div className="mt-7 max-w-2xl space-y-4 text-base leading-7 text-slate-600 md:text-lg md:leading-8">
-              {bioParagraphs.map((paragraph) => (
-                <BioParagraph key={paragraph} text={paragraph} />
+              {bioParagraphs.map((paragraph, index) => (
+                <BioParagraph
+                  key={paragraph}
+                  text={paragraph}
+                  suffix={
+                    index === bioParagraphs.length - 1 ? (
+                      <ScholarCitationInText href={profile.scholar} scholarStats={scholarStats} locale="en" icon={Icon} />
+                    ) : null
+                  }
+                />
               ))}
             </div>
           </div>
