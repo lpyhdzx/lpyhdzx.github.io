@@ -74,6 +74,7 @@ function runSmokeTests() {
   console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.venue))), "Every work must have a venue.");
   console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.tag))), "Every work must have a tag.");
   console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.detail))), "Every work must have a detail sentence.");
+  console.assert(directions.every((direction) => direction.works.every((work) => !work.demoUrl || work.demoUrl.startsWith("https://"))), "Every demo URL must be valid-looking.");
 }
 
 runSmokeTests();
@@ -193,15 +194,16 @@ function SectionTitle({ eyebrow, title, desc }) {
   );
 }
 
-function TryLink({ href, label = "Try Squrve Generator" }) {
+function DemoLink({ url, label = "Live Demo" }) {
   return (
     <a
-      href={href}
+      href={url}
       target="_blank"
-      rel="noopener noreferrer"
-      className="shrink-0 border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 hover:text-emerald-900"
+      rel="noreferrer"
+      className="mt-2 inline-flex items-center gap-1.5 border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 transition hover:border-emerald-300 hover:text-emerald-900"
     >
-      {label}
+      <span>{label}</span>
+      <Icon name="arrow" />
     </a>
   );
 }
@@ -215,16 +217,12 @@ function WorkItem({ work, theme }) {
         <span className={`shrink-0 border px-2 py-0.5 text-xs font-bold uppercase tracking-wide ${styles.label}`}>{work.venue}</span>
         <h3 className={`min-w-0 flex-1 text-sm font-semibold leading-6 text-slate-950 ${styles.hover}`}>{work.title}</h3>
       </div>
-      {work.tryUrl ? (
-        <div className="mt-2">
-          <TryLink href={work.tryUrl} label={work.tryLabel} />
-        </div>
-      ) : null}
       <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-500">
         <span className="font-semibold text-slate-500">{work.tag}</span>
         <span className="text-slate-300">/</span>
         <span>{work.detail}</span>
       </div>
+      {work.demoUrl ? <DemoLink url={work.demoUrl} label={work.demoLabel} /> : null}
     </div>
   );
 }
@@ -307,12 +305,8 @@ function PublicationItem({ paper }) {
         <h3 className="min-w-0 flex-1 text-sm font-semibold leading-6 text-slate-950">{paper.title}</h3>
         <BibButton paper={paper} />
       </div>
-      {paper.tryUrl ? (
-        <div className="mt-2">
-          <TryLink href={paper.tryUrl} label={paper.tryLabel} />
-        </div>
-      ) : null}
       <p className="mt-1 text-xs leading-5 text-slate-500">{paper.authors}</p>
+      {paper.demoUrl ? <DemoLink url={paper.demoUrl} label={paper.demoLabel} /> : null}
     </div>
   );
 }
