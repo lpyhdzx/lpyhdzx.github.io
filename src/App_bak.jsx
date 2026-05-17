@@ -1,7 +1,7 @@
 import React from "react";
 import { loadHomepageData } from "./lib/homepageData";
 
-const { profile, bioParagraphs, recruiting, teaching, courses, directions, publications, news } = loadHomepageData();
+const { profile, pills, courses, directions, news } = loadHomepageData();
 
 const themeStyles = {
   sky: {
@@ -26,52 +26,19 @@ const themeStyles = {
   },
 };
 
-function isNonEmptyString(value) {
-  return typeof value === "string" && value.trim().length > 0;
-}
-
-function groupPublicationsByYear(items) {
-  return items.reduce((groups, paper) => {
-    const existingGroup = groups.find((group) => group.year === paper.year);
-    if (existingGroup) {
-      existingGroup.items.push(paper);
-      return groups;
-    }
-    return [...groups, { year: paper.year, items: [paper] }];
-  }, []);
-}
-
 function runSmokeTests() {
-  const groupedPublications = groupPublicationsByYear(publications);
-
   console.assert(directions.length === 4, "Expected four homepage directions.");
-  console.assert(directions.filter((item) => item.id !== "open-source-project").length === 3, "Expected three research directions plus one open-source project.");
-  console.assert(news.length >= 3, "Expected at least three news items.");
-  console.assert(news.every((item) => isNonEmptyString(item.text)), "Every news item must have text.");
-  console.assert(news.filter((item) => item.latest).length === 1, "Expected exactly one latest news item.");
-  console.assert(publications.length >= 10, "Expected a substantial publication list.");
-  console.assert(groupedPublications.length < publications.length, "Publication years should be grouped.");
-  console.assert(publications.every((paper) => isNonEmptyString(paper.year)), "Every publication must have a year.");
-  console.assert(publications.every((paper) => isNonEmptyString(paper.venue)), "Every publication must have a venue.");
-  console.assert(publications.every((paper) => isNonEmptyString(paper.title)), "Every publication must have a title.");
-  console.assert(publications.every((paper) => isNonEmptyString(paper.authors)), "Every publication must have authors.");
+  console.assert(directions.filter((item) => item.id !== "squrve").length === 3, "Expected three research directions plus Squrve.");
+  console.assert(news.length >= 1, "Expected at least one news item.");
+  console.assert(news.every((item) => typeof item.text === "string" && item.text.length > 0), "Every news item must have text.");
   console.assert(courses.length === 4, "Expected four teaching course items.");
-  console.assert(bioParagraphs.length === 3, "Expected three biography paragraphs.");
-  console.assert(bioParagraphs.every((item) => isNonEmptyString(item)), "Every biography paragraph must be non-empty.");
-  console.assert(isNonEmptyString(recruiting.title), "Recruiting title must be non-empty.");
-  console.assert(isNonEmptyString(recruiting.text), "Recruiting text must be non-empty.");
-  console.assert(isNonEmptyString(profile.name), "Profile name must be non-empty.");
-  console.assert(isNonEmptyString(profile.email) && profile.email.includes("@"), "Profile email must be valid-looking.");
-  console.assert(isNonEmptyString(profile.scholar) && profile.scholar.startsWith("https://"), "Profile scholar link must be valid-looking.");
-  console.assert(isNonEmptyString(profile.homepage) && profile.homepage.startsWith("https://"), "Profile homepage link must be valid-looking.");
+  console.assert(pills.length === 5, "Expected five hero tags.");
+  console.assert(typeof profile.name === "string" && profile.name.length > 0, "Profile name must be non-empty.");
+  console.assert(typeof profile.email === "string" && profile.email.includes("@"), "Profile email must be valid-looking.");
   console.assert(directions.every((direction) => Array.isArray(direction.works) && direction.works.length > 0), "Every direction must have works.");
-  console.assert(directions.every((direction) => isNonEmptyString(direction.name)), "Every direction must have a name.");
-  console.assert(directions.every((direction) => isNonEmptyString(direction.desc)), "Every direction must have a description.");
+  console.assert(directions.every((direction) => typeof direction.name === "string" && direction.name.length > 0), "Every direction must have a name.");
   console.assert(directions.every((direction) => themeStyles[direction.theme]), "Every direction must use a known theme.");
-  console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.title))), "Every work must have a title.");
-  console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.venue))), "Every work must have a venue.");
-  console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.tag))), "Every work must have a tag.");
-  console.assert(directions.every((direction) => direction.works.every((work) => isNonEmptyString(work.detail))), "Every work must have a detail sentence.");
+  console.assert(directions.every((direction) => direction.works.every((work) => typeof work.title === "string" && work.title.length > 0)), "Every work must have a title.");
 }
 
 runSmokeTests();
@@ -94,25 +61,6 @@ function Icon({ name }) {
     );
   }
 
-  if (name === "scholar") {
-    return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M12 3L3 8l9 5 9-5-9-5Z" />
-        <path d="M6 10.5V15c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5" />
-      </svg>
-    );
-  }
-
-  if (name === "homepage") {
-    return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M4 10.5 12 4l8 6.5" />
-        <path d="M6.5 9.5V20h11V9.5" />
-        <path d="M10 20v-5h4v5" />
-      </svg>
-    );
-  }
-
   return (
     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M7 17L17 7" />
@@ -121,35 +69,16 @@ function Icon({ name }) {
   );
 }
 
+function Pill({ children }) {
+  return <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">{children}</span>;
+}
+
 function ProfileLink({ href, icon, label }) {
   return (
     <a href={href} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:border-sky-300 hover:text-sky-700">
       <Icon name={icon} />
       <span>{label}</span>
     </a>
-  );
-}
-
-function HighlightName({ children }) {
-  return <span className="rounded bg-sky-50 px-1.5 py-0.5 font-semibold text-sky-800">{children}</span>;
-}
-
-function BioParagraph({ text }) {
-  if (!text.includes("Prof. Wayne Xin Zhao") && !text.includes("Prof. Wei Xu")) {
-    return <p>{text}</p>;
-  }
-
-  const partsAfterWayne = text.split("Prof. Wayne Xin Zhao");
-  const partsAfterWei = partsAfterWayne[1].split("Prof. Wei Xu");
-
-  return (
-    <p>
-      {partsAfterWayne[0]}
-      <HighlightName>Prof. Wayne Xin Zhao</HighlightName>
-      {partsAfterWei[0]}
-      <HighlightName>Prof. Wei Xu</HighlightName>
-      {partsAfterWei[1]}
-    </p>
   );
 }
 
@@ -195,57 +124,13 @@ function DirectionRow({ direction, index }) {
         <p className="text-sm font-semibold leading-6 text-slate-700">{direction.subtitle}</p>
         <p className="mt-4 text-sm leading-6 text-slate-500">{direction.desc}</p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className={`border px-2.5 py-1 text-xs font-semibold ${styles.label}`}>{direction.works.length} featured works</span>
+          <span className={`border px-2.5 py-1 text-xs font-semibold ${styles.label}`}>{direction.works.length} works</span>
           <span className="border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-500">Research line</span>
         </div>
       </aside>
       <div className="border-t border-slate-100 pt-2 md:border-l md:border-t-0 md:pl-6 md:pt-0">
         {direction.works.map((work) => (
           <WorkItem key={work.id ?? work.title} work={work} theme={direction.theme} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function PublicationItem({ paper }) {
-  return (
-    <div className="border-b border-slate-100 py-4 last:border-b-0">
-      <div className="flex flex-wrap items-baseline gap-3">
-        <span className="border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-slate-600">{paper.venue}</span>
-        <h3 className="text-sm font-semibold leading-6 text-slate-950">{paper.title}</h3>
-      </div>
-      <p className="mt-1 text-xs leading-5 text-slate-500">{paper.authors}</p>
-    </div>
-  );
-}
-
-function PublicationYearGroup({ group }) {
-  return (
-    <div className="grid gap-4 border-b border-slate-200 py-5 last:border-b-0 md:grid-cols-[5rem_1fr]">
-      <div className="text-2xl font-semibold leading-none text-slate-300 md:pt-3">{group.year}</div>
-      <div className="border-l border-slate-100 pl-5">
-        {group.items.map((paper) => (
-          <PublicationItem key={paper.id ?? `${paper.venue}-${paper.title}`} paper={paper} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PublicationsSection() {
-  const groupedPublications = groupPublicationsByYear(publications);
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-12 md:px-10" id="publications">
-      <SectionTitle
-        eyebrow="Publications"
-        title="Selected and recent publications"
-        desc="A complete list of the works mentioned on this homepage, organized by year. The Research section above keeps only representative papers to show the scope of each direction."
-      />
-      <div className="border-y border-slate-200 bg-white px-5">
-        {groupedPublications.map((group) => (
-          <PublicationYearGroup key={group.year} group={group} />
         ))}
       </div>
     </section>
@@ -275,7 +160,6 @@ export default function PeiyuHomepage() {
         <nav className="hidden items-center gap-6 border border-slate-200 bg-white px-5 py-2 text-sm text-slate-600 md:flex">
           <a href="#research" className="hover:text-sky-700">Research</a>
           <a href="#works" className="hover:text-sky-700">Works</a>
-          <a href="#publications" className="hover:text-sky-700">Publications</a>
           <a href="#teaching" className="hover:text-sky-700">Teaching</a>
           <a href="#contact" className="hover:text-sky-700">Contact</a>
         </nav>
@@ -286,7 +170,7 @@ export default function PeiyuHomepage() {
           <div>
             <div className="border border-slate-200 bg-white p-4">
               <div className="overflow-hidden border border-slate-100 bg-white">
-                <div className="relative h-96 bg-slate-100">
+                <div className="relative h-[24rem] bg-slate-100">
                   <img src={profile.photo} alt={profile.name} className="h-full w-full object-cover" />
                 </div>
                 <div className="p-5">
@@ -298,47 +182,43 @@ export default function PeiyuHomepage() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 md:text-7xl">{profile.shortName}</h1>
+            <h1 className="max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-slate-950 md:text-7xl">{profile.shortName}</h1>
             <div className="mt-5 flex flex-wrap gap-3">
               <ProfileLink href={`mailto:${profile.email}`} icon="mail" label="Email" />
               <ProfileLink href={profile.github} icon="github" label="GitHub" />
-              <ProfileLink href={profile.scholar} icon="scholar" label="Google Scholar" />
-              <ProfileLink href={profile.homepage} icon="homepage" label="UIBE Homepage" />
             </div>
-            <div className="mt-7 max-w-2xl space-y-4 text-base leading-7 text-slate-600 md:text-lg md:leading-8">
-              {bioParagraphs.map((paragraph) => (
-                <BioParagraph key={paragraph} text={paragraph} />
+            <p className="mt-4 text-2xl font-medium text-slate-700 md:text-3xl">{profile.tagline}</p>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">{profile.bio}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {pills.map((item) => (
+                <Pill key={item}>{item}</Pill>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-6 py-4 md:px-10">
-          <div className="border-l-4 border-emerald-300 bg-white px-6 py-5">
-            <div className="text-xs font-semibold uppercase tracking-widest text-emerald-600">{recruiting.title}</div>
-            <p className="mt-3 max-w-4xl text-base leading-7 text-slate-700 md:text-lg md:leading-8">{recruiting.text}</p>
-            <a href={`mailto:${profile.email}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">
-              Contact me
-              <Icon name="arrow" />
-            </a>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <a className="group inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white" href="#works">
+                <span>Explore Works</span>
+                <Icon name="arrow" />
+              </a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700" href={`mailto:${profile.email}`}>
+                <span>Contact</span>
+                <Icon name="mail" />
+              </a>
+            </div>
           </div>
         </section>
 
         <section className="mx-auto max-w-7xl px-6 py-6 md:px-10">
           <div className="mb-5">
-            <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-sky-600">Updates</div>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-sky-600">Updates</div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">Latest news</h2>
           </div>
           <div className="border-y border-slate-200 bg-white">
             {news.map((item) => (
-              <div key={item.id ?? item.text} className="border-b border-slate-100 px-5 py-4 text-base font-medium leading-7 text-slate-700 last:border-b-0 md:text-lg">
-                <span>{item.text}</span>
-                {item.latest ? (
-                  <span className="ml-3 inline-flex items-center gap-1.5 align-middle text-xs font-bold uppercase tracking-wide text-amber-600">
-                    <span className="inline-block animate-bounce text-sm">👏</span>
-                    Latest
-                  </span>
+              <div key={item.id ?? item.text} className="flex gap-4 border-b border-slate-100 px-5 py-4 last:border-b-0">
+                {item.date ? (
+                  <time className="shrink-0 pt-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">{item.date}</time>
                 ) : null}
+                <p className="text-base font-medium leading-7 text-slate-700 md:text-lg">{item.text}</p>
               </div>
             ))}
           </div>
@@ -347,8 +227,8 @@ export default function PeiyuHomepage() {
         <section className="mx-auto max-w-7xl px-6 py-12 md:px-10" id="research">
           <SectionTitle
             eyebrow="Research Structure"
-            title="Research Directions & Open Source"
-            desc="The homepage foregrounds research scope rather than project decoration: each line keeps only representative works, while the full publication list is provided below."
+            title="Three research directions, plus one open-source system"
+            desc="The homepage foregrounds research scope rather than project decoration: each line uses text hierarchy and color highlights to connect a direction with its representative papers and systems."
           />
           <div className="space-y-4 border-y border-slate-200" id="works">
             {directions.map((direction, index) => (
@@ -357,15 +237,15 @@ export default function PeiyuHomepage() {
           </div>
         </section>
 
-        <PublicationsSection />
-
         <section className="mx-auto max-w-7xl px-6 py-14 md:px-10" id="teaching">
           <div className="border border-slate-200 bg-white p-8 md:p-10">
             <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-sky-600">Teaching</div>
-                <h2 className="text-3xl font-semibold text-slate-950">{teaching.title}</h2>
-                <p className="mt-4 text-base leading-7 text-slate-600">{teaching.description}</p>
+                <div className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-sky-600">Teaching</div>
+                <h2 className="text-3xl font-semibold text-slate-950">Teaching AI through systems, history, and practice</h2>
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  I teach data structures, algorithm design, AI literacy, and frontier topics in large language models, with an emphasis on automatic evaluation, project-based learning, and AI-empowered research practice.
+                </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {courses.map((course) => (

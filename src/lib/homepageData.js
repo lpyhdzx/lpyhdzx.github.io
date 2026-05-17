@@ -5,12 +5,31 @@ function sortByOrder(items) {
   return [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
-function sortNewsByDate(items) {
-  return [...items].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
+function sortNews(items) {
+  return [...items].sort((a, b) => {
+    if (Boolean(a.latest) !== Boolean(b.latest)) {
+      return Number(Boolean(b.latest)) - Number(Boolean(a.latest));
+    }
+    return String(b.date ?? "").localeCompare(String(a.date ?? ""));
+  });
+}
+
+function sortPublicationsByYear(items) {
+  return [...items].sort((a, b) => String(b.year).localeCompare(String(a.year)));
 }
 
 export function loadHomepageData() {
-  const { profile, pills, courses, directions, papers, news } = raw;
+  const {
+    profile,
+    bioParagraphs,
+    recruiting,
+    teaching,
+    courses,
+    directions,
+    papers,
+    publications,
+    news,
+  } = raw;
 
   const directionsWithWorks = directions.map((direction) => ({
     ...direction,
@@ -19,9 +38,12 @@ export function loadHomepageData() {
 
   return {
     profile: { ...profile, photo: authorPhoto },
-    pills,
+    bioParagraphs,
+    recruiting,
+    teaching,
     courses,
     directions: directionsWithWorks,
-    news: sortNewsByDate(news),
+    publications: sortPublicationsByYear(publications),
+    news: sortNews(news),
   };
 }

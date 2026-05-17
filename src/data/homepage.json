@@ -3,20 +3,26 @@
     "name": "Peiyu Liu / 刘沛羽",
     "shortName": "Peiyu Liu",
     "title": "Assistant Professor",
-    "affiliation": "University of International Business and Economics",
+    "affiliation": "School of Artificial Intelligence and Data Science, University of International Business and Economics",
     "group": "LLM-Cube",
     "email": "liupeiyustu@gmail.com",
     "github": "#",
-    "tagline": "Efficient LLMs, runtime systems, and agentic data intelligence.",
-    "bio": "I study how large language models can become more efficient and useful by reorganizing parameters, reducing runtime memory cost, and building adaptive agent workflows for real-world data tasks."
+    "scholar": "https://scholar.google.com/citations?user=0UyGs0YAAAAJ&hl=zh-CN",
+    "homepage": "https://it.uibe.edu.cn/szdw/dsjkxyjzx/2e6af159ce2b4ca68fdaad5c932fd43c.htm"
   },
-  "pills": [
-    "Assistant Professor",
-    "Efficient LLMs",
-    "Model Compression",
-    "Long-context Inference",
-    "Text-to-SQL Agents"
+  "bioParagraphs": [
+    "I am currently an Assistant Professor at the School of Artificial Intelligence and Data Science, University of International Business and Economics.",
+    "I received my PhD in Artificial Intelligence from the Gaoling School of Artificial Intelligence, Renmin University of China, advised by Prof. Wayne Xin Zhao. I also hold an MS in Software Engineering from the School of Information, advised by Prof. Wei Xu.",
+    "My research interests primarily focus on natural language processing, model compression, and efficient LLM systems."
   ],
+  "recruiting": {
+    "title": "Prospective Students",
+    "text": "I am always happy to hear from motivated students who are curious about efficient LLMs, model compression, long-context inference, and agentic data intelligence. If you have your own ideas and want to work on meaningful research with real impact, feel free to contact me."
+  },
+  "teaching": {
+    "title": "Teaching AI through systems, history, and practice",
+    "description": "I teach data structures, algorithm design, AI literacy, and frontier topics in large language models, with an emphasis on automatic evaluation, project-based learning, and AI-empowered research practice."
+  },
   "courses": [
     "Data Structures & Algorithms",
     "AI Literacy",
@@ -27,130 +33,246 @@
     {
       "id": "parameters",
       "name": "Parameters",
-      "subtitle": "Efficient parameter representation and structural adaptation",
-      "desc": "This line studies how to reduce and reorganize model parameters through decomposition, sharing, masking, and lightweight structural transformation.",
+      "subtitle": "Parameter expansion, compression, and parameter-efficient adaptation",
+      "desc": "This line studies how to make model parameters more flexible and efficient: expanding capacity, compressing parameters, and adapting models with lightweight trainable components.",
       "theme": "sky"
     },
     {
       "id": "runtime",
       "name": "Runtime",
-      "subtitle": "KV cache, long-context inference, and memory-aware evaluation",
-      "desc": "This line focuses on runtime cost, especially memory footprint and latency during long-context prefill and decoding.",
+      "subtitle": "KV cache compression, long-context memory, and inference acceleration",
+      "desc": "This line focuses on runtime efficiency after the model is deployed, especially KV cache memory, long-context reasoning, and fast retrieval-augmented video or multimodal inference.",
       "theme": "cyan"
     },
     {
       "id": "agent",
       "name": "Agent",
-      "subtitle": "Dynamic workflows, tool use, and agentic data intelligence",
-      "desc": "This line treats LLM applications as workflow systems, where the model chooses tools, composes components, and adapts execution paths to each query.",
+      "subtitle": "Data synthesis, Text-to-SQL agents, and dynamic workflow learning",
+      "desc": "This line studies how LLMs can become better problem solvers through synthesized reasoning data, schema linking, and learned workflows for complex data analysis.",
       "theme": "violet"
     },
     {
-      "id": "squrve",
-      "name": "Squrve",
-      "subtitle": "An open-source system for Text-to-SQL research and deployment",
-      "desc": "Squrve turns the Text-to-SQL research line into reusable components, evaluation workflows, and deployable data-analysis systems.",
+      "id": "open-source-project",
+      "name": "Open Source Project",
+      "subtitle": "Squrve: a modular framework for complex real-world Text-to-SQL tasks",
+      "desc": "This line presents Squrve as the open-source project layer of the Text-to-SQL research line, integrating modular components, workflow construction, evaluation, and deployment-oriented support for complex real-world data analysis tasks.",
       "theme": "emerald"
     }
   ],
   "papers": [
     {
-      "id": "masks-moe",
+      "id": "param-sharing-emnlp23",
       "directionId": "parameters",
       "order": 1,
-      "venue": "ACL 2025",
-      "title": "Masks Can be Learned as an Alternative to Experts",
-      "tag": "Mixture-of-Masks",
-      "detail": "Learnable binary masks for sparse expert-like computation."
+      "venue": "EMNLP Findings 2023",
+      "title": "Enhancing Scalability of Pre-trained Language Models via Efficient Parameter Sharing",
+      "tag": "Expansion / Dense",
+      "detail": "Scalable dense model expansion through parameter sharing."
     },
     {
-      "id": "mpop",
+      "id": "moe-pruning-neurips25",
       "directionId": "parameters",
       "order": 2,
+      "venue": "NeurIPS 2025",
+      "title": "Domain-specific Pruning of Large Mixture-of-Experts Models with Few-shot Demonstrations",
+      "tag": "Compression / MoE Pruning",
+      "detail": "Few-shot domain-specific pruning for large MoE models."
+    },
+    {
+      "id": "mpo-acl21",
+      "directionId": "parameters",
+      "order": 3,
       "venue": "ACL 2021",
-      "title": "MPOP: Lightweight Fine-tuning for Pre-trained Language Model Compression",
-      "tag": "MPO Fine-tuning",
-      "detail": "Matrix product operator based parameter-efficient adaptation."
+      "title": "Enabling Lightweight Fine-tuning for Pre-trained Language Model Compression Based on Matrix Product Operators",
+      "tag": "PEFT / MPO",
+      "detail": "Matrix product operator based lightweight fine-tuning."
     },
     {
-      "id": "livelongbench",
+      "id": "kv-quant-acl24",
       "directionId": "runtime",
       "order": 1,
-      "venue": "ACL 2026 Findings",
-      "title": "LiveLongBench: Tackling Long-Context Understanding for Spoken Texts from Live Streams",
-      "tag": "Long Context",
-      "detail": "Spoken long-context benchmark for retrieval and reasoning."
+      "venue": "ACL 2024",
+      "title": "Unlocking Data-free Low-bit Quantization with Matrix Decomposition for KV Cache Compression",
+      "tag": "KV Cache / Quantization",
+      "detail": "Data-free low-bit KV cache compression with matrix decomposition."
     },
     {
-      "id": "fastv-rag",
+      "id": "foresightkv-icml26",
       "directionId": "runtime",
       "order": 2,
-      "venue": "Project",
-      "title": "FastV-RAG: Fast Visual Retrieval-Augmented Generation",
-      "tag": "Video / Visual RAG",
-      "detail": "Visual RAG exploration with a small GIF-style demo."
+      "venue": "ICML 2026",
+      "title": "ForesightKV: Optimizing KV Cache Eviction for Reasoning Models by Learning Long-Term Contribution",
+      "tag": "KV Cache / Eviction",
+      "detail": "Learning long-term token contribution for KV cache eviction in reasoning models."
     },
     {
-      "id": "kv-cache",
+      "id": "fastv-rag-acl26",
       "directionId": "runtime",
       "order": 3,
-      "venue": "Ongoing",
-      "title": "KV Cache Compression for Long-context LLM Inference",
-      "tag": "Runtime Memory",
-      "detail": "Reducing KV cache storage while preserving QA performance."
+      "venue": "ACL 2026",
+      "title": "FastV-RAG: Towards Fast and Fine-Grained Video QA with Retrieval-Augmented Generation",
+      "tag": "Inference Acceleration / Video RAG",
+      "detail": "Fast and fine-grained retrieval-augmented video question answering."
     },
     {
-      "id": "dynamic-workflows",
+      "id": "socratic-acl25",
       "directionId": "agent",
       "order": 1,
+      "venue": "ACL Findings 2025",
+      "title": "Socratic Style Chain-of-Thoughts Help LLMs to be a Better Reasoner",
+      "tag": "Data Synthesis / Reasoning",
+      "detail": "Socratic-style chain-of-thought synthesis for improving reasoning ability."
+    },
+    {
+      "id": "linkalign-emnlp25",
+      "directionId": "agent",
+      "order": 2,
+      "venue": "EMNLP 2025",
+      "title": "LinkAlign: Scalable Schema Linking for Real-world Large-scale Multi-database Text-to-SQL",
+      "tag": "Text-to-SQL / Schema Linking",
+      "detail": "Scalable schema linking for real-world multi-database Text-to-SQL."
+    },
+    {
+      "id": "dynamic-workflows-icml26",
+      "directionId": "agent",
+      "order": 3,
       "venue": "ICML 2026",
       "title": "Beyond Static Pipelines: Learning Dynamic Workflows for Text-to-SQL",
-      "tag": "Dynamic Workflows",
-      "detail": "Query-specific Text-to-SQL workflows beyond fixed pipelines."
+      "tag": "Text-to-SQL / Dynamic Workflow",
+      "detail": "Learning query-specific workflows instead of using fixed Text-to-SQL pipelines."
     },
     {
-      "id": "harness-engineering",
-      "directionId": "agent",
-      "order": 2,
-      "venue": "Survey / Ongoing",
-      "title": "Harness Engineering for LLM-based Agents",
-      "tag": "Agent Infrastructure",
-      "detail": "Prompts, tools, memory, context, and scaffolds for agents."
-    },
-    {
-      "id": "squrve-toolkit",
-      "directionId": "squrve",
+      "id": "squrve-demo-acl26",
+      "directionId": "open-source-project",
       "order": 1,
-      "venue": "Toolkit",
-      "title": "Squrve: An Open-source Toolkit for Text-to-SQL Workflows",
-      "tag": "Open Source",
-      "detail": "Modular components for SQL generation, evaluation, and refinement."
+      "venue": "ACL 2026 Demo",
+      "title": "Squrve: A Unified and Modular Framework for Complex Real-World Text-to-SQL Tasks",
+      "tag": "Open Source / Text-to-SQL",
+      "detail": "A unified modular framework for complex real-world Text-to-SQL workflows."
+    }
+  ],
+  "publications": [
+    {
+      "id": "foresightkv-icml26-pub",
+      "year": "2026",
+      "venue": "ICML 2026",
+      "title": "ForesightKV: Optimizing KV Cache Eviction for Reasoning Models by Learning Long-Term Contribution",
+      "authors": "Zican Dong, Peiyu Liu, Junyi Li, Zhipeng Chen, Han Peng, Shuo Wang, Wayne Xin Zhao"
     },
     {
-      "id": "squrve-sql",
-      "directionId": "squrve",
-      "order": 2,
-      "venue": "Method",
-      "title": "Stronger SQL Generation with Workflow-level Optimization",
-      "tag": "Text-to-SQL",
-      "detail": "Robust SQL generation on top of Squrve workflows."
+      "id": "fastv-rag-acl26-pub",
+      "year": "2026",
+      "venue": "ACL 2026",
+      "title": "FastV-RAG: Towards Fast and Fine-Grained Video QA with Retrieval-Augmented Generation",
+      "authors": "Gen Li, Peiyu Liu"
+    },
+    {
+      "id": "dynamic-workflows-icml26-pub",
+      "year": "2026",
+      "venue": "ICML 2026",
+      "title": "Beyond Static Pipelines: Learning Dynamic Workflows for Text-to-SQL",
+      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Wei Xu"
+    },
+    {
+      "id": "squrve-demo-acl26-pub",
+      "year": "2026",
+      "venue": "ACL 2026 Demo",
+      "title": "Squrve: A Unified and Modular Framework for Complex Real-World Text-to-SQL Tasks",
+      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Jiaxing Pu, Wei Xu"
+    },
+    {
+      "id": "moe-pruning-neurips25-pub",
+      "year": "2025",
+      "venue": "NeurIPS 2025",
+      "title": "Domain-specific Pruning of Large Mixture-of-Experts Models with Few-shot Demonstrations",
+      "authors": "Zican Dong, Han Peng, Peiyu Liu, Wayne Xin Zhao, Dong Wu, Feng Xiao, Zhifeng Wang"
+    },
+    {
+      "id": "masks-acl25-pub",
+      "year": "2025",
+      "venue": "ACL 2025",
+      "title": "Masks Can be Learned as an Alternative to Experts",
+      "authors": "Peiyu Liu, Tianwen Wei, Bo Zhu, Wayne Xin Zhao, Shuicheng Yan"
+    },
+    {
+      "id": "socratic-acl25-pub",
+      "year": "2025",
+      "venue": "ACL Findings 2025",
+      "title": "Socratic Style Chain-of-Thoughts Help LLMs to be a Better Reasoner",
+      "authors": "Jiangbo Pei, Peiyu Liu, Wayne Xin Zhao, Aidong Men, Yang Liu"
+    },
+    {
+      "id": "linkalign-emnlp25-pub",
+      "year": "2025",
+      "venue": "EMNLP 2025",
+      "title": "LinkAlign: Scalable Schema Linking for Real-world Large-scale Multi-database Text-to-SQL",
+      "authors": "Yihan Wang, Peiyu Liu, Xin Yang"
+    },
+    {
+      "id": "quant-emergent-lrec24",
+      "year": "2024",
+      "venue": "LREC-COLING 2024",
+      "title": "Do Emergent Abilities Exist in Quantized Large Language Models: An Empirical Study",
+      "authors": "Peiyu Liu, Zikang Liu, Ze-Feng Gao, Dawei Gao, Wayne Xin Zhao, Yaliang Li, Bolin Ding, Ji-Rong Wen"
+    },
+    {
+      "id": "kv-quant-acl24-pub",
+      "year": "2024",
+      "venue": "ACL 2024",
+      "title": "Unlocking Data-free Low-bit Quantization with Matrix Decomposition for KV Cache Compression",
+      "authors": "Peiyu Liu, Ze-Feng Gao, Wayne Xin Zhao, Yipeng Ma, Tao Wang, Ji-Rong Wen"
+    },
+    {
+      "id": "stable-rank-lrec24",
+      "year": "2024",
+      "venue": "LREC-COLING 2024",
+      "title": "Enhancing Parameter-efficient Fine-tuning with Simple Calibration Based on Stable Rank",
+      "authors": "Peiyu Liu, Ze-Feng Gao, Xiao Zhang, Wayne Xin Zhao, Ji-Rong Wen"
+    },
+    {
+      "id": "param-sharing-emnlp23-pub",
+      "year": "2023",
+      "venue": "EMNLP Findings 2023",
+      "title": "Enhancing Scalability of Pre-trained Language Models via Efficient Parameter Sharing",
+      "authors": "Peiyu Liu, Ze-Feng Gao, Yushuo Chen, Wayne Xin Zhao, Ji-Rong Wen"
+    },
+    {
+      "id": "overparam-acl23",
+      "year": "2023",
+      "venue": "ACL 2023",
+      "title": "Small Pre-trained Language Models Can be Fine-tuned as Large Models via Over-parameterization",
+      "authors": "Ze-Feng Gao, Kun Zhou, Peiyu Liu, Wayne Xin Zhao, Ji-Rong Wen"
+    },
+    {
+      "id": "moe-coling22",
+      "year": "2022",
+      "venue": "COLING 2022",
+      "title": "Parameter-efficient Mixture-of-Experts Architecture for Pre-trained Language Models",
+      "authors": "Ze-Feng Gao, Peiyu Liu, Wayne Xin Zhao, Zhong-Yi Lu, Ji-Rong Wen"
+    },
+    {
+      "id": "mpo-acl21-pub",
+      "year": "2021",
+      "venue": "ACL 2021",
+      "title": "Enabling Lightweight Fine-tuning for Pre-trained Language Model Compression Based on Matrix Product Operators",
+      "authors": "Peiyu Liu, Ze-Feng Gao, Wayne Xin Zhao, Zhi-Yuan Xie, Zhong-Yi Lu, Ji-Rong Wen"
     }
   ],
   "news": [
     {
-      "id": "icml-2026-workflows",
-      "date": "2026-05",
-      "text": "ICML 2026 regular paper accepted on dynamic workflows for Text-to-SQL."
+      "id": "icml-2026-reviewer",
+      "text": "Selected as an ICML 2026 Silver Reviewer.",
+      "latest": true
     },
     {
-      "id": "acl-2026-livelongbench",
-      "date": "2026-03",
-      "text": "ACL 2026 Findings paper accepted: LiveLongBench for spoken long-context understanding."
+      "id": "acl-2026-three-papers",
+      "text": "Three papers accepted by ACL 2026: one Main paper, one Findings paper, and one Demo paper.",
+      "latest": false
     },
     {
-      "id": "squrve-dev",
-      "date": "2026-01",
-      "text": "Squrve is being developed as an open-source framework for Text-to-SQL workflows."
+      "id": "icml-2026-two-papers",
+      "text": "Two papers accepted by ICML 2026, covering dynamic Text-to-SQL workflows and KV cache optimization.",
+      "latest": false
     }
   ]
 }
