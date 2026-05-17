@@ -168,6 +168,13 @@
       "authors": "Zican Dong, Peiyu Liu, Junyi Li, Zhipeng Chen, Han Peng, Shuo Wang, Wayne Xin Zhao"
     },
     {
+      "id": "dynamic-workflows-icml26-pub",
+      "year": "2026",
+      "venue": "ICML 2026",
+      "title": "Beyond Static Pipelines: Learning Dynamic Workflows for Text-to-SQL",
+      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Wei Xu"
+    },
+    {
       "id": "fastv-rag-acl26-pub",
       "year": "2026",
       "venue": "ACL 2026",
@@ -175,11 +182,12 @@
       "authors": "Gen Li, Peiyu Liu"
     },
     {
-      "id": "dynamic-workflows-icml26-pub",
+      "id": "livelongbench-acl26-pub",
+      "dblpKey": "journals/corr/abs-2504-17366",
       "year": "2026",
-      "venue": "ICML 2026",
-      "title": "Beyond Static Pipelines: Learning Dynamic Workflows for Text-to-SQL",
-      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Wei Xu"
+      "venue": "ACL 2026 Findings",
+      "title": "LiveLongBench: Tackling Long-Context Understanding for Spoken Texts from Live Streams",
+      "authors": "Yongxuan Wu, Runyu Chen, Peiyu Liu, Hongjin Qian"
     },
     {
       "id": "squrve-demo-acl26-pub",
