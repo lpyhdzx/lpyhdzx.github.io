@@ -193,6 +193,19 @@ function SectionTitle({ eyebrow, title, desc }) {
   );
 }
 
+function TryLink({ href, label = "Try Squrve Generator" }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="shrink-0 border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100 hover:text-emerald-900"
+    >
+      {label}
+    </a>
+  );
+}
+
 function WorkItem({ work, theme }) {
   const styles = themeStyles[theme] || themeStyles.sky;
 
@@ -200,7 +213,8 @@ function WorkItem({ work, theme }) {
     <div className="group border-b border-slate-100 py-3 last:border-b-0">
       <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-3">
         <span className={`shrink-0 border px-2 py-0.5 text-xs font-bold uppercase tracking-wide ${styles.label}`}>{work.venue}</span>
-        <h3 className={`text-sm font-semibold leading-6 text-slate-950 ${styles.hover}`}>{work.title}</h3>
+        <h3 className={`min-w-0 flex-1 text-sm font-semibold leading-6 text-slate-950 ${styles.hover}`}>{work.title}</h3>
+        {work.tryUrl ? <TryLink href={work.tryUrl} label={work.tryLabel} /> : null}
       </div>
       <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-500">
         <span className="font-semibold text-slate-500">{work.tag}</span>
@@ -287,6 +301,7 @@ function PublicationItem({ paper }) {
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-slate-600">{paper.venue}</span>
         <h3 className="min-w-0 flex-1 text-sm font-semibold leading-6 text-slate-950">{paper.title}</h3>
+        {paper.tryUrl ? <TryLink href={paper.tryUrl} label={paper.tryLabel} /> : null}
         <BibButton paper={paper} />
       </div>
       <p className="mt-1 text-xs leading-5 text-slate-500">{paper.authors}</p>

@@ -153,7 +153,9 @@
       "venue": "ACL 2026 Demo",
       "title": "Squrve: A Unified and Modular Framework for Complex Real-World Text-to-SQL Tasks",
       "tag": "Open Source / Text-to-SQL",
-      "detail": "A unified modular framework for complex real-world Text-to-SQL workflows."
+      "detail": "A unified modular framework for complex real-world Text-to-SQL workflows.",
+      "tryUrl": "https://www.ebcloud.com/lab/squrve-generator",
+      "tryLabel": "Try Squrve Generator"
     }
   ],
   "publications": [
@@ -183,7 +185,9 @@
       "year": "2026",
       "venue": "ACL 2026 Demo",
       "title": "Squrve: A Unified and Modular Framework for Complex Real-World Text-to-SQL Tasks",
-      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Jiaxing Pu, Wei Xu"
+      "authors": "Yihan Wang, Peiyu Liu, Runyu Chen, Jiaxing Pu, Wei Xu",
+      "tryUrl": "https://www.ebcloud.com/lab/squrve-generator",
+      "tryLabel": "Try Squrve Generator"
     },
     {
       "id": "moe-pruning-neurips25-pub",
